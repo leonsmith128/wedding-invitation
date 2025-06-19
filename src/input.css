@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.bg1,
+.bg2 {
+  transition: opacity 4s ease-in-out;
+}
+
+.bgcolor{
+  background-color: #F9F6F1;
+}
