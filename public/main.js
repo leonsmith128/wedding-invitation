@@ -45,12 +45,19 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
   }, 0);
 
-  // Tampilkan nama tamu
-  const nama = new URLSearchParams(window.location.search).get("to") || "Tamu Undangan";
-  const guestName = document.getElementById("guest-name");
-  if (guestName) {
-    guestName.textContent = `${decodeURIComponent(nama)}`;
-  }
+// Ambil nama tamu dari parameter URL
+const urlParams = new URLSearchParams(window.location.search);
+const rawNama = urlParams.get("to") || "Tamu Undangan";
+
+// Decode nama (agar + jadi spasi, dll)
+const decodedNama = decodeURIComponent(rawNama);
+
+// Set nama tamu ke elemen dengan ID #guest-name
+const guestName = document.getElementById("guest-name");
+if (guestName) {
+  guestName.textContent = decodedNama;
+}
+
 
   // Scroll ke section kedua saat tombol diklik
   const openButton = document.getElementById("open-button");
