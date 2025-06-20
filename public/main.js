@@ -1,54 +1,94 @@
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-  const animationMap = {
-    "fade":       { from: { opacity: 0 }, to: { opacity: 1 } },
-    "fade-up":    { from: { opacity: 0, y: 40 }, to: { opacity: 1, y: 0 } },
-    "fade-left":  { from: { opacity: 0, x: -40 }, to: { opacity: 1, x: 0 } },
-    "fade-right": { from: { opacity: 0, x: 40 }, to: { opacity: 1, x: 0 } },
-    "zoom-in":    { from: { opacity: 0, scale: 0.8 }, to: { opacity: 1, scale: 1 } },
-    "zoom-out":   { from: { opacity: 0, scale: 1.3 }, to: { opacity: 1, scale: 1 } }
+const animationMap = {
+  "fade":       { from: { opacity: 0 }, to: { opacity: 1 } },
+  "fade-up":    { from: { opacity: 0, y: 40 }, to: { opacity: 1, y: 0 } },
+  "fade-left":  { from: { opacity: 0, x: -40 }, to: { opacity: 1, x: 0 } },
+  "fade-right": { from: { opacity: 0, x: 40 }, to: { opacity: 1, x: 0 } },
+  "zoom-in":    { from: { opacity: 0, scale: 0.8 }, to: { opacity: 1, scale: 1 } },
+  "zoom-out":   { from: { opacity: 0, scale: 1.3 }, to: { opacity: 1, scale: 1 } }
+};
+
+document.querySelectorAll("[gsap]").forEach(elem => {
+  const type = elem.getAttribute("gsap");
+  const delay = parseFloat(elem.dataset.delay) || 0;
+  const duration = parseFloat(elem.dataset.duration) || 1;
+
+  if (!animationMap[type]) return;
+
+  const fromVars = animationMap[type].from;
+  const toVars = {
+    ...animationMap[type].to,
+    delay,
+    duration,
+    ease: "power2.out",
+    overwrite: "auto",
+    scrollTrigger: {
+      trigger: elem,
+      toggleActions: "play none none none",
+      once: true,
+    }
   };
 
-  document.querySelectorAll("[gsap]").forEach(elem => {
-    const type = elem.getAttribute("gsap");
-    const delay = parseFloat(elem.dataset.delay) || 0;
-    const duration = parseFloat(elem.dataset.duration) || 1;
+  gsap.fromTo(elem, fromVars, toVars);
+});
 
-    if (!animationMap[type]) return;
+// Atur ulang posisi scroll dan tampilkan nama tamu
+document.addEventListener("DOMContentLoaded", () => {
+  // Nonaktifkan scroll restoration
+  if (history.scrollRestoration) {
+    history.scrollRestoration = "manual";
+  }
 
-    const fromVars = animationMap[type].from;
-    const toVars = {
-      ...animationMap[type].to,
-      delay,
-      duration,
-      ease: "power2.out",
-      overwrite: "auto",
-      scrollTrigger: {
-        trigger: elem,
-        toggleActions: "play none none none",
-        once: true,
+  // Reset scroll ke atas
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+  }, 0);
+
+  // Tampilkan nama tamu
+  const nama = new URLSearchParams(window.location.search).get("to") || "Tamu Undangan";
+  const guestName = document.getElementById("guest-name");
+  if (guestName) {
+    guestName.textContent = `${decodeURIComponent(nama)}`;
+  }
+
+  // Scroll ke section kedua saat tombol diklik
+  const openButton = document.getElementById("open-button");
+  if (openButton) {
+    openButton.addEventListener("click", () => {
+      const mainContent = document.querySelector("section:nth-of-type(2)");
+      if (mainContent) {
+        gsap.to(window, {
+          scrollTo: {
+            y: mainContent.offsetTop,
+            autoKill: false
+          },
+          duration: 1.5,
+          ease: "power2.out"
+        });
       }
-    };
+    });
+  }
+});
 
-    gsap.fromTo(elem, fromVars, toVars);
-  });
-
-
+// Transisi gambar latar
 let showFirst = true;
 const bg1 = document.querySelector('.bg1');
 const bg2 = document.querySelector('.bg2');
+if (bg1 && bg2) {
+  setInterval(() => {
+    if (showFirst) {
+      bg1.classList.add('opacity-0');
+      bg2.classList.remove('opacity-0');
+    } else {
+      bg1.classList.remove('opacity-0');
+      bg2.classList.add('opacity-0');
+    }
+    showFirst = !showFirst;
+  }, 6000);
+}
 
-setInterval(() => {
-  if (showFirst) {
-    bg1.classList.add('opacity-0');
-    bg2.classList.remove('opacity-0');
-  } else {
-    bg1.classList.remove('opacity-0');
-    bg2.classList.add('opacity-0');
-  }
-  showFirst = !showFirst;
-}, 6000); // Ganti gambar setiap 6 detik
-
+// Odometer (Counter)
 document.addEventListener("DOMContentLoaded", () => {
   const counters = [
     { id: "counter-acara-1", value: 22 },
@@ -64,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const counterData = counters.find(c => c.id === targetId);
 
         if (counterData) {
-          // Trigger odometer by replacing innerHTML
           target.innerHTML = counterData.value;
           obs.unobserve(target);
         }
@@ -78,19 +117,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Set tanggal target: 23 Juni 2025, 10:00 WITA (GMT+8)
+// Countdown Timer
 const targetDate = new Date("2025-06-23T10:00:00+08:00").getTime();
-
-// Fungsi update countdown setiap detik
 const updateCountdown = () => {
   const now = new Date().getTime();
   const distance = targetDate - now;
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
 
-  if (distance < 0) {
-    document.getElementById("days").innerText = "00";
-    document.getElementById("hours").innerText = "00";
-    document.getElementById("minutes").innerText = "00";
-    document.getElementById("seconds").innerText = "00";
+  if (distance < 0 || !daysEl || !hoursEl || !minutesEl || !secondsEl) {
+    if (daysEl) daysEl.innerText = "00";
+    if (hoursEl) hoursEl.innerText = "00";
+    if (minutesEl) minutesEl.innerText = "00";
+    if (secondsEl) secondsEl.innerText = "00";
     return;
   }
 
@@ -99,22 +140,16 @@ const updateCountdown = () => {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  document.getElementById("days").innerText = String(days).padStart(2, '0');
-  document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-  document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-  document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+  daysEl.innerText = String(days).padStart(2, '0');
+  hoursEl.innerText = String(hours).padStart(2, '0');
+  minutesEl.innerText = String(minutes).padStart(2, '0');
+  secondsEl.innerText = String(seconds).padStart(2, '0');
 };
-// Jalankan langsung dan ulangi tiap detik
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-
-// Refs
-const form = document.getElementById("comment-form");
-const container = document.getElementById("comments-list");
+// Firebase Komentar
 const commentsRef = db.collection("comments").orderBy("waktu", "desc");
-
-// Format waktu
 function formatWaktu(timestamp) {
   const waktu = timestamp?.toDate ? timestamp.toDate() : new Date(timestamp);
   const now = new Date();
@@ -141,45 +176,49 @@ function formatWaktu(timestamp) {
   }
 }
 
-// Realtime listener saat DOM siap
 document.addEventListener("DOMContentLoaded", () => {
-  commentsRef.onSnapshot((snapshot) => {
-    container.innerHTML = "";
-    snapshot.forEach(doc => {
-      const comment = doc.data();
-      const waktuRelatif = formatWaktu(comment.waktu);
-      const isHadir = comment.kehadiran === "Hadir";
+  const container = document.getElementById("comments-list");
+  if (container) {
+    commentsRef.onSnapshot((snapshot) => {
+      container.innerHTML = "";
+      snapshot.forEach(doc => {
+        const comment = doc.data();
+        const waktuRelatif = formatWaktu(comment.waktu);
+        const isHadir = comment.kehadiran === "Hadir";
 
-      const el = document.createElement("div");
-      el.classList.add("mb-4", "text-left");
-
-      el.innerHTML = `
-        <div class="flex items-center gap-2">
-          <p class="font-bold text-md">${comment.nama}</p>
-          ${isHadir ? `<img src="assets/centang.png" alt="Hadir" class="w-4 h-4" />` : ""}
-        </div>
-        <p class="text-sm mb-1">${comment.ucapan}</p>
-        <p class="text-xs text-gray-500">${waktuRelatif}</p>
-      `;
-      container.appendChild(el);
+        const el = document.createElement("div");
+        el.classList.add("mb-4", "text-left");
+        el.innerHTML = `
+          <div class="flex items-center gap-2">
+            <p class="font-bold text-md">${comment.nama}</p>
+            ${isHadir ? `<img src="assets/centang.png" alt="Hadir" class="w-4 h-4" />` : ""}
+          </div>
+          <p class="text-sm mb-1">${comment.ucapan}</p>
+          <p class="text-xs text-gray-500">${waktuRelatif}</p>
+        `;
+        container.appendChild(el);
+      });
     });
-  });
+  }
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const nama = document.getElementById("nama").value.trim();
-    const ucapan = document.getElementById("ucapan").value.trim();
-    const kehadiran = document.getElementById("kehadiran").value;
+  const form = document.getElementById("comment-form");
+  if (form) {
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const nama = document.getElementById("nama")?.value.trim();
+      const ucapan = document.getElementById("ucapan")?.value.trim();
+      const kehadiran = document.getElementById("kehadiran")?.value;
 
-    if (!nama || !ucapan || !kehadiran) return;
+      if (!nama || !ucapan || !kehadiran) return;
 
-    await addDoc(commentsRef, {
-      nama,
-      ucapan,
-      kehadiran,
-      waktu: serverTimestamp()
+      await db.collection("comments").add({
+        nama,
+        ucapan,
+        kehadiran,
+        waktu: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      form.reset();
     });
-
-    form.reset();
-  });
+  }
 });

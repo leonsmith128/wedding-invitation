@@ -4,6 +4,8 @@ module.exports = {
     "./**/*.html",
     "./*.js",
     "./**/*.js",
+    "./**/*.html",
+    "./**/*.css",
   ],
   theme: {
     extend: {
@@ -12,7 +14,7 @@ module.exports = {
       },
     },
   },
-  
+
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('tailwind-scrollbar'),

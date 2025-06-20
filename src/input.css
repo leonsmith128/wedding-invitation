@@ -30,3 +30,16 @@ body.no-scroll {
   overflow: hidden;
   height: 100vh;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+#main-content {
+  margin: 0;
+  padding: 0;
+}
+section:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  top: 0;
+}
