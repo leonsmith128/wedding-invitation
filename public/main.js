@@ -45,18 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
   }, 0);
 
-// Ambil nama tamu dari parameter URL
+  
+function capitalizeWords(text) {
+  return text.replace(/\w\S*/g, word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+}
+
 const urlParams = new URLSearchParams(window.location.search);
 const rawNama = urlParams.get("to") || "Tamu Undangan";
-
-// Decode nama (agar + jadi spasi, dll)
 const decodedNama = decodeURIComponent(rawNama);
+const formattedNama = capitalizeWords(decodedNama);
 
-// Set nama tamu ke elemen dengan ID #guest-name
 const guestName = document.getElementById("guest-name");
 if (guestName) {
-  guestName.textContent = decodedNama;
+  guestName.textContent = formattedNama;
 }
+
 
 
   // Scroll ke section kedua saat tombol diklik
