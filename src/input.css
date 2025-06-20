@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@plugin 'tailwind-scrollbar';
 
 .bg1,
 .bg2 {
@@ -7,4 +8,25 @@
 
 .bgcolor{
   background-color: #F9F6F1;
+}
+
+[gsap] {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Tambahan style agar transisi lebih smooth (jika mau pakai opacity) */
+.digit {
+  display: inline-block;
+  min-width: 1ch;
+}
+
+.odometer {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
 }

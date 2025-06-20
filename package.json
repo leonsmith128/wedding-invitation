@@ -13,11 +13,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
+    "watch": "npx @tailwindcss/cli -i ./src/input.css -o ./public/output.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.10",
+    "firebase": "^11.9.1",
+    "tailwind-scrollbar-hide": "^4.0.0",
     "tailwindcss": "^4.1.10"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "tailwind-scrollbar": "^4.0.2"
+  }
 }

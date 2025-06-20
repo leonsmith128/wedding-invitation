@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adrian & Rahmi</title>
+  <link rel="stylesheet" href="output.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-minimal.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+
+
+</head>
+<body class=" bg-[#FAF6F0] font-poppins text-[#634E17]">
+<!-- <section id="hero-intro" class="relative h-screen overflow-hidden text-white">
+<div class="relative w-full h-screen overflow-hidden">
+  <div class="bg-image absolute inset-0 opacity-0 transition-opacity duration-1000">
+    <div class="hidden sm:block w-full h-full bg-cover bg-center" style="background-image: url('/public/assets/couple1.jpg')"></div>
+    <div class="block sm:hidden w-full h-full bg-cover bg-center" style="background-image: url('/public/assets/couple1-sm.jpg')"></div>
+  </div>
+
+  <div class="bg-image absolute inset-0 opacity-0 transition-opacity duration-1000">
+    <div class="hidden sm:block w-full h-full bg-cover bg-center" style="background-image: url('/public/assets/couple2.jpg')"></div>
+    <div class="block sm:hidden w-full h-full bg-cover bg-center" style="background-image: url('/public/assets/couple2-sm.jpg')"></div>
+  </div>
+
+  <div class="relative z-10 text-white text-center h-full flex flex-col items-center justify-center px-4">
+    <p class="text-sm tracking-widest uppercase mb-2">The Wedding Of</p>
+    <h1 class="text-4xl sm:text-6xl font-bold mb-2">Dilla & Fadli</h1>
+    <p class="text-sm sm:text-base">Kepada Yth,<br />Keluarga Besar Sikola Inspirasi Alam</p>
+    <button id="open-button" class="mt-6 px-5 py-2 bg-white text-gray-700 rounded font-semibold shadow hover:bg-gray-200 transition-all">
+      Buka Undangan
+    </button>
+  </div>
+</div>
+</section> -->
+
+
+<main id="main-content" class="">
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-screen" gsap="fade" data-duration="2.4">
+    <!-- Background Images -->
+    <picture class="bg1 absolute inset-0 transition-opacity duration-1000">
+      <source media="(max-width: 768px)" srcset="assets/couple1-sm.jpg" />
+      <img src="assets/couple1.jpg" class="w-full h-full object-cover" alt="Couple" />
+    </picture>
+    <picture class="bg2 absolute inset-0 transition-opacity duration-1000 opacity-0">
+      <source media="(max-width: 768px)" srcset="assets/couple2-sm.jpg" />
+      <img src="assets/couple2.jpg" class="w-full h-full object-cover" alt="Couple 2" />
+    </picture>
+
+    <!-- Overlay Content -->
+    <div class="absolute inset-0 flex flex-col justify-end items-center text-center pb-24 z-20" gsap="fade-up" data-duration="1.5" data-delay="0.4">
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-[#FAF6F0] via-[#FAF6F0]/90 to-transparent z-10"></div>
+      <!-- Text -->
+      <div class="relative z-20 px-4">
+        <p class="text-sm tracking-widest mb-3">WEDDING INVITATION</p>
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">ADRIYAN & RAHMI</h1>
+        <p class="text-m">23 JUNI 2025</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wedding Intro -->
+  <section class="py-10 min-h-screen px-[5%] sm:px-[10] md:px-[15%] lg:px-[20%] xl:px-[25%] 2xl:px-[30%] text-center">
+    <div class="pb-2">
+      <h2 class="text-3xl mb-6 font-bold" gsap="zoom-in" data-duration="1.2" data-delay="0.1">THE WEDDING OF</h2>
+      <!-- Bismillah -->
+      <img src="assets/bismillah.png" alt="Bismillahirrahmanirrahim" gsap="fade-right" data-duration="1.8" data-delay="0.3" class="mx-auto mt-2 mb-4 w-62 h-16" />
+      <!-- Ucapan Pembuka -->
+      <p class="mt-4 text-sm text-gray-800 leading-relaxed" gsap="fade-left" data-duration="1.8" data-delay="0.3">
+        Assalamualaikum Warahmatullahi Wabarakatuh
+        Dengan memohon Rahmat dan Ridho Allah SWT. <br> Kami bermaksud untuk menyelenggarakan acara pernikahan kami:
+      </p>
+    </div>
+
+    <!-- Mempelai Pria -->
+    <div class="pt-4">
+      <div class="px-8 mb-6 py-3">
+        <img src="assets/couple3.jpg" alt="Mempelai Pria" class="mx-auto mb-4 rounded-[2rem] shadow-xl aspect-[3/4] h-80 w-auto object-cover" gsap="zoom-in" data-duration="3" data-delay="0.4" />
+      </div>
+      <h3 class="font-poppins text-4xl font-semibold mb-2" gsap="fade-right" data-duration="1.8" data-delay="0.5">Muhammad Adriyan</h3>
+      <p class="text-sm text-gray-800" gsap="zoom-in" data-duration="3" data-delay="0.2">
+        Putra kedua dari <br> Bapak Madi & Ibu Mantang
+      </p>
+      <a href="https://instagram.com/lii.fadli" target="_blank" class="inline-flex items-center border-[#A58127] bg-transparent mt-2 px-2 py-0.5 rounded-xl gap-1 text-sm text-gray-600 hover:text-[#A58127]" gsap="zoom-in" data-duration="3" data-delay="0.3">
+        <img src="assets/instagram.png" class="w-3.5 h-3.5" alt="Instagram" /> @lii.fadli
+      </a>
+    </div>
+
+    <!-- Separator -->
+    <div class="text-4xl font-poppins font-bold mt-7 mb-8" gsap="zoom-in" data-duration="2.4" data-delay="0.5">&</div>
+
+    <!-- Mempelai Wanita -->
+    <div class="mb-8">
+      <h3 class="font-poppins text-4xl font-semibold mb-2" gsap="fade-left" data-duration="1.8" data-delay="0.4">Rahmi Yulianti</h3>
+      <p class="text-sm text-gray-800" gsap="zoom-in" data-duration="2.1" data-delay="0.5">
+        Putri pertama dari <br> Bapak Herman & Ibu Ramlah
+      </p>
+      <a href="https://instagram.com/fadilaahs" target="_blank" class="inline-flex items-center gap-2 mt-2 text-sm text-gray-700 hover:text-pink-600" gsap="zoom-in" data-duration="3" data-delay="0.3">
+        <img src="assets/instagram.png" class="w-3.5 h-3.5" alt="Instagram" /> @fadilaahs
+      </a>
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
+  <section class="relative text-white text-center h-[70vh] overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 z-0">
+      <img src="assets/couple3.jpg" alt="Countdown Background" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-[#AD8C34]/20 to-[#A58127]"></div>
+    </div>
+
+    <!-- Countdown Content -->
+    <div class="absolute bottom-[10%] w-full z-10 flex flex-col items-center px-4">
+      <h2 class="text-xl md:text-3xl font-semibold text-white mb-6" gsap="zoom-in" data-duration="1.2" data-delay="0.3">HARI YANG DITUNGGU</h2>
+      <div class="flex justify-center gap-2 sm:gap-4 flex-nowrap" gsap="fade-up" data-duration="2" data-delay="0.4">
+        <div class="bg-white text-center rounded-xl p-5 w-[22vw] max-w-[70px] sm:max-w-[80px] md:max-w-[100px]">
+          <div class="text-2xl md:text-2xl font-bold text-[#A58127]" id="days">00</div>
+          <div class="text-xs font-semibold text-[#A58127]">Hari</div>
+        </div>
+        <div class="bg-white text-center rounded-xl py-5 w-[22vw] max-w-[70px] sm:max-w-[80px] md:max-w-[100px]">
+          <div class="text-2xl md:text-2xl font-bold text-[#A58127]" id="hours">00</div>
+          <div class="text-xs font-semibold text-[#A58127]">Jam</div>
+        </div>
+        <div class="bg-white text-center rounded-xl p-5 w-[22vw] max-w-[70px] sm:max-w-[80px] md:max-w-[100px]">
+          <div class="text-2xl md:text-2xl font-bold text-[#A58127]" id="minutes">00</div>
+          <div class="text-xs font-semibold text-[#A58127]">Menit</div>
+        </div>
+        <div class="bg-white text-center rounded-xl p-5 w-[22vw] max-w-[70px] sm:max-w-[80px] md:max-w-[100px]">
+          <div class="text-2xl md:text-2xl font-bold text-[#A58127]" id="seconds">00</div>
+          <div class="text-xs font-semibold text-[#A58127]">Detik</div>
+        </div>
+      </div>
+      <button class="mt-6 px-2 py-2 border border-white rounded-md text-sm hover:bg-white hover:text-[#AD8C34] transition" gsap="zoom-in" data-duration="2" data-delay="0.6">
+        + Add to Calendar
+      </button>
+    </div>
+  </section>
+
+  <!-- Akad Section -->
+  <section class="relative bg-[#A58127] text-white text-center pt-12 pb-20 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:mt-8">
+      <!-- AKAD ITEM -->
+      <div class="bg-[#A58127] text-gray-50 rounded-xl">
+        <div gsap="fade-up" data-duration="1.8" data-delay="0.3">
+          <p class="font-bold text-2xl">AKAD</p>
+          <p class="text-sm mb-4">Sabtu</p>
+        </div>
+        <div class="bg-gray-100 text-[#A58127] rounded-2xl py-4 px-8 inline-block mb-4">
+          <p class="text-md">JUNI</p>
+          <p class="text-4xl mt-3 mb-2 font-bold">
+            <span id="counter-acara-1" class="odometer">00</span>
+          </p>
+          <p class="text-md">2025</p>
+        </div>
+        <div gsap="fade-up" data-duration="2" data-delay="0.3">
+          <p class="text-sm mb-2">10.00 WITA</p>
+          <p class="text-sm font-semibold">Kediaman Mempelai Wanita</p>
+          <p class="text-xs mb-4">Rante Padang, Desa Rante Mario<br />Kec. Malua, Kab. Enrekang</p>
+        </div>
+        <div gsap="zoom-in" data-duration="1.8" data-delay="0.6">
+          <a href="https://maps.google.com/?q=Jl+Sawitto,+Pinrang" target="_blank">
+            <button class="inline-flex items-center gap-2 border border-white text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-white/30 transition-all duration-300">
+              <img src="assets/location.png" alt="Lokasi" class="w-4 h-4" />
+              Lihat Lokasi
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- RESEPSI ITEM -->
+      <div class="bg-[#A58127] text-gray-50 rounded-xl py-6 px-4">
+        <div gsap="zoom-in" data-duration="1.8" data-delay="0.4">
+          <p class="font-bold text-2xl">RESEPSI 1</p>
+          <p class="text-sm mb-4">Sabtu</p>
+        </div>
+        <div class="bg-gray-100 text-[#A58127] rounded-2xl py-4 px-8 inline-block mb-4">
+          <p class="text-md">JUNI</p>
+          <p class="text-4xl mt-3 mb-2 font-bold">
+            <span id="counter-acara-2" class="odometer">00</span>
+          </p>
+          <p class="text-md">2025</p>
+        </div>
+        <div gsap="fade-up" data-duration="2" data-delay="0.3">
+          <p class="text-sm mb-2">13.00 WITA</p>
+          <p class="text-sm font-semibold">Kediaman Mempelai Wanita</p>
+          <p class="text-xs mb-4">Jl. Contoh No. 123<br />Kec. Enrekang</p>
+        </div>
+        <div gsap="zoom-in" data-duration="1.8" data-delay="0.6">
+          <a href="https://maps.google.com/?q=Jl+Sawitto,+Pinrang" target="_blank">
+            <button class="inline-flex items-center gap-2 border border-white text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-white/30 transition-all duration-300">
+              <img src="assets/location.png" alt="Lokasi" class="w-4 h-4" />
+              Lihat Lokasi
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- NGUNDUH MANTU ITEM -->
+      <div class="bg-[#A58127] text-gray-50 rounded-xl pb-4 px-2">
+        <div gsap="zoom-in" data-duration="1.8" data-delay="0.3">
+          <p class="font-bold text-2xl">RESEPSI 2</p>
+          <p class="text-sm mb-4">Minggu</p>
+        </div>
+        <div class="bg-gray-100 text-[#A58127] rounded-2xl py-6 px-8 inline-block mb-4">
+          <p class="text-md">JUNI</p>
+          <p class="text-4xl mt-3 mb-2 font-bold">
+            <span id="counter-acara-3" class="odometer">00</span>
+          </p>
+          <p class="text-md">2025</p>
+        </div>
+        <div gsap="fade-up" data-duration="2" data-delay="0.3">
+          <p class="text-sm mb-2">10.00 WITA</p>
+          <p class="text-sm font-semibold">Kediaman Mempelai Pria</p>
+          <p class="text-xs mb-4">Jl. Sawitto, Kab. Pinrang</p>
+        </div>
+        <div gsap="zoom-in" data-duration="1.8" data-delay="0.5">
+          <a href="https://maps.google.com/?q=Jl+Sawitto,+Pinrang" target="_blank">
+            <button class="inline-flex items-center gap-2 border border-white text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-white/30 transition-all duration-300">
+              <img src="assets/location.png" alt="Lokasi" class="w-4 h-4" />
+              Lihat Lokasi
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-14 px-3 mt-8 bg-[#FAF6F0] text-center">
+    <h2 class="text-4xl font-bold mb-10" gsap="zoom-in" data-delay="0.2" data-duration="2">OUR MOMENT</h2>
+    <!-- SWIPER SLIDER -->
+    <div class="swiper mySwiper overflow-hidden max-w-md mx-auto rounded-md mb-4">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="w-full aspect-[3/4]">
+            <img src="assets/couple2.jpg" class="w-full h-full object-cover" alt="Foto 1" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="w-full aspect-[3/4]">
+            <img src="/public/assets/galeri/3.jpg" class="w-full h-full object-cover" alt="Foto 2" />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="w-full aspect-[3/4]">
+            <img src="assets/couple3.jpg" class="w-full h-full object-cover" alt="Foto 3" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="px-2 pt-2 pb-8">
+      <p class="text-sm text-[#634E17] text-center" gsap="fade-left" data-duration="1.8" data-delay="0.6">
+        <i>"Apa yang telah dituliskan untukmu akan datang kepadamu meskipun berada di antara dua gunung, dan apa yang tidak dituliskan untukmu tidak akan menjadi milikmu walau berada di telapak tanganmu - Imam Syafi’i</i>"
+      </p>
+    </div>
+    <!-- GRID GALLERY -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-4xl mx-auto mt-4 mb-4 px-1">
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/1.jpg" alt="Gallery 4" class="w-full h-full object-cover rounded-md shadow" gsap="fade-up" data-duration="1.5" data-delay="0.5" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/2.jpg" alt="Gallery 5" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="0.8" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/9.jpg" alt="Gallery 6" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="0.9" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/4.jpg" alt="Gallery 7" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="1" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/5.jpg" alt="Gallery 8" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="1" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/6.jpg" alt="Gallery 9" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="1.1" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/7.jpg" alt="Gallery 10" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="1.1" />
+      </div>
+      <div class="aspect-[3/4]">
+        <img src="/public/assets/galeri/8.jpg" alt="Gallery 11" class="w-full h-full object-cover rounded-md shadow" gsap="zoom-in" data-duration="1.5" data-delay="1.2" />
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-[#A58127] xl:px-[30%] px-5 py-13">
+    <p class="text-center text-sm text-[#FAF6F0]" gsap="fade-up" data-duration="2.8" data-delay="0.8">
+      <i>"Dan Di Antara Tanda-Tanda (Kebesaran)-Nya, Ialah Dia Menciptakan Pasangan-Pasangan Untukmu Dari Jenismu Sendiri, Agar Kamu Cenderung Dan Merasa Tenteram Kepadanya, Dan Dia Menjadikan Di Antaramu Rasa Kasih Dan Sayang. Sungguh, Pada Yang Demikian Itu Benar-Benar Terdapat Tanda-Tanda (Kebesaran Allah) Bagi Kaum Yang Berpikir."<br /><br />
+      Q.S AR-RUUM : 21</i>
+    </p>
+  </div>
+
+  <!-- Comment Section -->
+  <section id="comment-section" class="py-18 px-6 sm:px-8 bg-[#FAF6F0] text-gray-800 text-center">
+    <h2 class="text-4xl sm:text-4xl text-[#634E17] font-bold mb-10" gsap="zoom-in" data-duration="1.5" data-delay="0.3">Wedding Wish</h2>
+    <!-- Form -->
+    <form id="comment-form" class="max-w-xl mx-auto space-y-4 text-left mb-12 text-sm sm:text-base">
+      <input
+        type="text"
+        id="nama"
+        placeholder="Nama"
+        required
+        class="w-full px-3 py-1.5 rounded-md bg-[#F1E1BC] text-[#634E17] focus:bg-[#F4E8CD] placeholder:text-sm sm:placeholder:text-[#634E17] focus:outline-none focus:ring-2 focus:ring-[#A58127] shadow"
+        gsap="fade-up" data-duration="1.3" data-delay="0.4"
+      />
+      <textarea
+        id="ucapan"
+        placeholder="Kirim Ucapan"
+        rows="3"
+        required
+        class="w-full p-2 rounded-md bg-[#F1E1BC] focus:bg-[#F4E8CD] text-[#634E17] placeholder:text-sm sm:placeholder:text-[#634E17] focus:outline-none focus:ring-2 focus:ring-[#A58127] resize-none shadow"
+        gsap="fade-up" data-duration="1.5" data-delay="0.5"
+      ></textarea>
+      <select
+        id="kehadiran"
+        required
+        class="w-full p-2 rounded-md border border-gray-300 bg-[#F1E1BC] text-[#634E17] text-sm sm:text-base focus:bg-[#F1E1BC] focus:outline-none focus:ring-2 focus:ring-[#A58127] transition-colors shadow"
+        gsap="fade-up" data-duration="1.8" data-delay="0.6"
+      >
+        <option value="" disabled selected hidden>Konfirmasi Kehadiran</option>
+        <option value="Hadir" class="text-[#634E17] border-t border-gray-200">Hadir</option>
+        <option value="Tidak Hadir" class="text-[#634E17] border-t border-gray-200">Tidak Hadir</option>
+      </select>
+      <button
+        type="submit"
+        class="bg-[#A58127] text-white text-sm sm:text-base px-5 py-2 rounded hover:bg-[#84681F] transition"
+        gsap="zoom-in" data-duration="1.6" data-delay="1.4"
+      >
+        Kirim
+      </button>
+    </form>
+
+    <!-- List Komentar -->
+    <div id="comments-list" class="max-w-xl mx-auto space-y-6 text-left overflow-y-auto max-h-[40vh] px-2 text-sm sm:text-base scrollbar-none" gsap="zoom-in" data-duration="1.8" data-delay="0.6">
+      <!-- Komentar akan muncul di sini -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative text-white h-screen w-full">
+    <!-- Background -->
+    <div class="absolute inset-0">
+      <img src="assets/couple1-sm.jpg" alt="Couple" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    <!-- Konten -->
+    <div class="relative z-10 flex flex-col justify-between h-full items-center py-16 px-6 text-center">
+      <!-- Atas -->
+      <div class="mt-10">
+        <p class="text-sm mb-2 opacity-90" gsap="fade-left" data-duration="1.8" data-delay="0.6">Dua hati menjadi utuh oleh satu janji.</p>
+        <h1 class="text-3xl md:text-4xl font-bold" gsap="fade-right" data-duration="1.8" data-delay="0.6">ADRIYAN & RAHMI</h1>
+      </div>
+      <!-- Bawah -->
+      <div class="mb-4 space-y-2" gsap="fade-up" data-duration="1.8" data-delay="0.6">
+        <div class altogether
+        <div class="flex items-center justify-center gap-2">
+          <p class="text-xs opacity-90">Made With Love</p>
+          <img src="assets/love.png" alt="Love" class="w-4 h-4" />
+        </div>
+        <div class="flex items-center justify-center gap-1">
+          <span class="text-md font-bold">Ammar</span>
+        </div>
+        <!-- Sosmed -->
+        <div class="mt-3 flex justify-center gap-4">
+          <a href="https://instagram.com/muammarr_12" target="_blank">
+            <img src="assets/instagram-col.png" alt="Instagram" class="w-4 h-4" />
+          </a>
+          <a href="https://wa.me/62878421362020" target="_blank">
+            <img src="assets/whatsapp.png" alt="WhatsApp" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const swiper = new Swiper(".mySwiper", {
+        loop: true,
+        slidesPerView: "auto",
+        spaceBetween: 0,
+        speed: 7000,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+        },
+        allowTouchMove: false,
+      });
+    });
+  </script>
+  <script src="firebase.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
