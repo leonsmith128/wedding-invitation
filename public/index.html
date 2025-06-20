@@ -16,6 +16,9 @@
   <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
 
 </head>
+<!-- Audio Element -->
+<audio id="bg-music" src="assets/lagu.mp3" preload="auto" loop></audio>
+
 <body id="body" class="bg-[#FAF6F0] font-poppins text-[#634E17]">
 <main id="main-content" class="">
   <!-- Hero Section -->
@@ -343,30 +346,33 @@
         <p class="text-sm mb-2 opacity-90" gsap="fade-left" data-duration="1.8" data-delay="0.6">Dua hati menjadi utuh oleh satu janji.</p>
         <h1 class="text-3xl md:text-4xl font-bold" gsap="fade-right" data-duration="1.8" data-delay="0.6">ADRIYAN & RAHMI</h1>
       </div>
-<!-- Bawah -->
-<div class="mb-4 space-y-2" gsap="fade-up" data-duration="1.8" data-delay="0.6">
-  <!-- Made With Love -->
-  <div class="flex items-center justify-center gap-2">
-    <p class="text-xs opacity-90">Made With Love</p>
-    <img src="assets/love.png" alt="Love" class="w-4 h-4" />
-  </div>
-
-  <!-- Nama dan Sosmed -->
-  <div class="flex flex-col items-center px-4">
-    <span class="text-md font-bold">Ammar</span>
-    <div class="flex gap-3 mt-1">
-      <a href="https://instagram.com/muammarr_12" target="_blank">
-        <img src="assets/instagram-col.png" alt="Instagram" class="w-4 h-4" />
-      </a>
-      <a href="https://wa.me/6287842136202" target="_blank">
-        <img src="assets/whatsapp.png" alt="WhatsApp" class="w-4 h-4" />
-      </a>
-    </div>
-  </div>
-</div>
-
+      <!-- Bawah -->
+      <div class="mb-4 space-y-2" gsap="fade-up" data-duration="1.8" data-delay="0.6">
+        <!-- Made With Love -->
+        <div class="flex items-center justify-center gap-2">
+          <p class="text-xs opacity-90">Made With Love</p>
+          <img src="assets/love.png" alt="Love" class="w-4 h-4" />
+        </div>
+      
+        <!-- Nama dan Sosmed -->
+        <div class="flex flex-col items-center px-4">
+          <span class="text-md font-bold">Ammar</span>
+          <div class="flex gap-3 mt-1">
+            <a href="https://instagram.com/muammarr_12" target="_blank">
+              <img src="assets/instagram-col.png" alt="Instagram" class="w-4 h-4" />
+            </a>
+            <a href="https://wa.me/6287842136202" target="_blank">
+              <img src="assets/whatsapp.png" alt="WhatsApp" class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </footer>
+<!-- Music Button -->
+<button id="music-btn" class="fixed bottom-5 md:p-2 right-5 z-50 bg-white/90 hover:bg-white text-gray-800 shadow-lg rounded-full transition">
+  <img id="music-icon" src="assets/pause.png" alt="Pause" class="w-7 h-7" />
+</button>
 </main>
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

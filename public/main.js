@@ -232,3 +232,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  const musicBtn = document.getElementById("music-btn");
+  const musicIcon = document.getElementById("music-icon");
+
+  // Play otomatis (handle autoplay policy di beberapa browser)
+  const playAudio = () => {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        // Mungkin butuh interaksi user baru bisa play
+        console.warn("Autoplay blocked: ", err);
+      });
+    }
+  };
+
+  // Play saat klik "Buka Undangan"
+  const bukaBtn = document.getElementById("open-button");
+  if (bukaBtn) {
+    bukaBtn.addEventListener("click", () => {
+      setTimeout(() => {
+        playAudio();
+      }, 100); // delay dikit biar smooth
+    });
+  } else {
+    // Fallback kalau tidak ada tombol
+    playAudio();
+  }
+
+  // Toggle musik
+  musicBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      musicIcon.src = "assets/pause.png";
+    } else {
+      audio.pause();
+      musicIcon.src = "assets/play.png";
+    }
+  });
+});
