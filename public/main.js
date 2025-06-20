@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
   }, 0);
 
-  
+
 function capitalizeWords(text) {
   return text.replace(/\w\S*/g, word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 }
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Countdown Timer
-const targetDate = new Date("2025-06-23T10:00:00+08:00").getTime();
+const targetDate = new Date("2025-06-22T10:00:00+08:00").getTime();
 const updateCountdown = () => {
   const now = new Date().getTime();
   const distance = targetDate - now;
