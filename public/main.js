@@ -35,6 +35,32 @@ document.querySelectorAll("[gsap]").forEach(elem => {
 
 // Atur ulang posisi scroll dan tampilkan nama tamu
 document.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  const musicBtn = document.getElementById("music-btn");
+  const musicIcon = document.getElementById("music-icon");
+  // Autoplay musik
+  const autoPlay = () => {
+    audio.volume = 0.5;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.warn("Autoplay diblokir, tunggu interaksi user", err);
+      });
+    }
+  };
+  autoPlay();
+
+  // Toggle play/pause
+  musicBtn.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      musicIcon.src = "assets/pause.png";
+    } else {
+      audio.pause();
+      musicIcon.src = "assets/play.png";
+    }
+  });
+  
   // Nonaktifkan scroll restoration
   if (history.scrollRestoration) {
     history.scrollRestoration = "manual";
@@ -234,42 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("bg-music");
-  const musicBtn = document.getElementById("music-btn");
-  const musicIcon = document.getElementById("music-icon");
 
-  // Play otomatis (handle autoplay policy di beberapa browser)
-  const playAudio = () => {
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(err => {
-        // Mungkin butuh interaksi user baru bisa play
-        console.warn("Autoplay blocked: ", err);
-      });
-    }
-  };
-
-  // Play saat klik "Buka Undangan"
-  const bukaBtn = document.getElementById("open-button");
-  if (bukaBtn) {
-    bukaBtn.addEventListener("click", () => {
-      setTimeout(() => {
-        playAudio();
-      }, 100); // delay dikit biar smooth
-    });
-  } else {
-    // Fallback kalau tidak ada tombol
-    playAudio();
-  }
-
-  // Toggle musik
-  musicBtn.addEventListener("click", () => {
-    if (audio.paused) {
-      audio.play();
-      musicIcon.src = "assets/pause.png";
-    } else {
-      audio.pause();
-      musicIcon.src = "assets/play.png";
-    }
-  });
 });
+

@@ -17,10 +17,13 @@
 
 </head>
 <!-- Audio Element -->
-<audio id="bg-music" src="assets/lagu.mp3" preload="auto" loop></audio>
 
 <body id="body" class="bg-[#FAF6F0] font-poppins text-[#634E17]">
-<main id="main-content" class="">
+  <main id="main-content" class="">
+    <audio id="bg-music" src="assets/lagu.mp3" preload="auto" loop></audio>
+    <button id="music-btn" class="fixed bottom-5 right-5 z-50 bg-white/80 backdrop-blur-md hover:bg-white text-gray-800 shadow-xl rounded-full">
+      <img id="music-icon" src="assets/pause.png" alt="Pause Icon" class="w-6 h-6" />
+    </button>
   <!-- Hero Section -->
   <section class="relative w-full min-h-screen" gsap="fade" data-duration="2.4">
     <!-- Background Images -->
@@ -369,10 +372,6 @@
       </div>
     </div>
   </footer>
-<!-- Music Button -->
-<button id="music-btn" class="fixed bottom-5 md:p-2 right-5 z-50 bg-white/90 hover:bg-white text-gray-800 shadow-lg rounded-full transition">
-  <img id="music-icon" src="assets/pause.png" alt="Pause" class="w-7 h-7" />
-</button>
 </main>
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
